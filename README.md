@@ -3,9 +3,23 @@ localStorage
 
 An inefficient, but as W3C-compliant as possible using only pure JavaScript, `localStorage` implementation.
 
-    var localStorage = require('localStorage');
+Purpose
+----
+
+This is meant for the purpose of being able to run unit-tests and such for browser-y modules in node.
+
+Usage
+----
+
+    var localStorage = require('localStorage')
+      , myValue = { foo: 'bar', baz: 'quux' }
+      ;
+
+    localStorage.setItem('myKey', JSON.stringify(myValue));
+    myValue = localStorage.getItem('myKey');
 
 API
+---
 
   * getItem(key)
   * setItem(key, value)
@@ -15,6 +29,7 @@ API
   * length
 
 Tests
+---
 
     0 === localStorage.length;
     null === localStorage.getItem('doesn't exist');
@@ -36,5 +51,6 @@ Tests
 TODO / Bugs
 ---
 
-  Does not persist.
-  Doesn't not emit `Storage` events
+  * Does not persist.
+    * could use `fs.readFileSync` at load and an occasional `fs.writeFile` to write-out localStorage.json
+  * Doesn't not emit `Storage` events
