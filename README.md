@@ -1,7 +1,7 @@
-localStorage
+DOMStorage
 ===
 
-An inefficient, but as W3C-compliant as possible using only pure JavaScript, `localStorage` implementation.
+An inefficient, but as W3C-compliant as possible using only pure JavaScript, `DOMStorage` implementation.
 
 Purpose
 ----
@@ -11,7 +11,9 @@ This is meant for the purpose of being able to run unit-tests and such for brows
 Usage
 ----
 
-    var localStorage = require('localStorage')
+    var Storage = require('dom-storage')
+      , localStorage = new Storage('./db.json') // in-file
+      , sessionStorage = new Storage()                // in-memory
       , myValue = { foo: 'bar', baz: 'quux' }
       ;
 
@@ -48,9 +50,9 @@ Tests
     localStorage.clear();
     0 === localStorage.length;
 
-TODO / Bugs
+Notes
 ---
 
-  * Does not persist.
-    * could use `fs.readFileSync` at load and an occasional `fs.writeFile` to write-out localStorage.json
-  * Doesn't not emit `Storage` events
+  * db is read in synchronously
+  * No callback when db is saved
+  * Doesn't not emit `Storage` events (not sure how to do)
