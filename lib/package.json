@@ -1,16 +1,16 @@
 {
   "author": "AJ ONeal <coolaj86@gmail.com> (http://coolaj86.info)",
-  "name": "dom-storage",
-  "description": "W3C DOM Storage (localStorage and sessionStorage) for Node.JS",
+  "name": "localStorage",
+  "description": "W3C localStorage for Node.JS",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/coolaj86/node-browser-compat.git"
+    "url": "git://github.com/coolaj86/node-localStorage.git"
   },
   "engines": {
-    "node": "*"
+    "node": ">= v0.2.0"
   },
-  "main": "index.js",
+  "main": "localStorage.js",
   "dependencies": {},
   "devDependencies": {}
 }

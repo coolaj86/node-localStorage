@@ -1,57 +1,34 @@
-/*jshint node:true es5:true laxcomma:true laxbreak:true*/
 (function () {
   "use strict";
 
   var assert = require('assert')
-    , fs = require('fs')
-    , Storage = require('dom-storage')
-    , dbPath = './db.json'
+    , localStorage = require('localStorage')
     ;
 
-  function runTest(storage) {
-    assert.strictEqual(0, Object.keys(storage).length);
-    assert.strictEqual(0, storage.length);
+  // can't make assuptions about key positioning
+  localStorage.setItem('a', 1);
+  assert.strictEqual(localStorage.key(0), 'a');
 
-    // can't make assuptions about key positioning
-    storage.setItem('a', 1);
-    assert.strictEqual(storage.key(0), 'a');
+  localStorage.setItem('b', '2');
+  assert.strictEqual(localStorage.getItem('a'), '1');
+  assert.strictEqual(localStorage.getItem('b'), '2');
+  assert.strictEqual(localStorage.length, 2);
 
-    storage.setItem('b', '2');
-    assert.strictEqual(storage.getItem('a'), '1');
-    assert.strictEqual(storage.getItem('b'), '2');
-    assert.strictEqual(storage.length, 2);
+  assert.strictEqual(localStorage['c'], undefined);
+  assert.strictEqual(localStorage.getItem('c'), null);
 
-    assert.strictEqual(storage['c'], undefined);
-    assert.strictEqual(storage.getItem('c'), null);
+  localStorage.setItem('c');
+  assert.strictEqual(localStorage.getItem('c'), "undefined");
+  assert.strictEqual(localStorage.length, 3);
 
-    storage.setItem('c');
-    assert.strictEqual(storage.getItem('c'), "undefined");
-    assert.strictEqual(storage.length, 3);
+  localStorage.removeItem('c');
+  assert.strictEqual(localStorage.getItem('c'), null);
+  assert.strictEqual(localStorage.length, 2);
 
-    storage.removeItem('c');
-    assert.strictEqual(storage.getItem('c'), null);
-    assert.strictEqual(storage.length, 2);
+  localStorage.clear();
+  assert.strictEqual(localStorage.getItem('a'), null);
+  assert.strictEqual(localStorage.getItem('b'), null);
+  assert.strictEqual(localStorage.length, 0);
 
-    storage.clear();
-    assert.strictEqual(storage.getItem('a'), null);
-    assert.strictEqual(storage.getItem('b'), null);
-    assert.strictEqual(storage.length, 0);
-  }
-
-  function runAll() {
-    var localStorage = new Storage(dbPath)
-      , sessionStorage = new Storage()
-      ;
-
-    runTest(sessionStorage);
-    runTest(localStorage);
-
-    localStorage.setItem('a', 1);
-    setTimeout(function () {
-      assert.deepEqual({ a: 1 }, JSON.parse(fs.readFileSync(dbPath)));
-      console.log('All tests passed');
-    }, 100);
-  }
-
-  fs.unlink(dbPath, runAll);
+  console.log('All tests passed');
 }());
