@@ -1,15 +1,16 @@
-localStorage
-===
+# DOMStorage
+
+See https://github.com/coolaj86/node-dom-storage for a slightly better version of the same thing.
+
+# localStorage
 
 An inefficient, but as W3C-compliant as possible using only pure JavaScript, `localStorage` implementation.
 
-Purpose
-----
+## Purpose
 
 This is meant for the purpose of being able to run unit-tests and such for browser-y modules in node.
 
-Usage
-----
+## Usage
 
     var localStorage = require('localStorage')
       , myValue = { foo: 'bar', baz: 'quux' }
@@ -18,8 +19,7 @@ Usage
     localStorage.setItem('myKey', JSON.stringify(myValue));
     myValue = localStorage.getItem('myKey');
 
-API
----
+## API
 
   * getItem(key)
   * setItem(key, value)
@@ -28,8 +28,9 @@ API
   * key(n)
   * length
 
-Tests
----
+## Tests
+
+    null === localStorage.getItem('key');
 
     0 === localStorage.length;
     null === localStorage.getItem('doesn't exist');
