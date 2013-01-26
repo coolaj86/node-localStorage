@@ -5,6 +5,9 @@
     , localStorage = require('localStorage')
     ;
 
+  // don't return prototypical things
+  assert.strictEqual(localStorage.getItem('key'), null);
+
   // can't make assuptions about key positioning
   localStorage.setItem('a', 1);
   assert.strictEqual(localStorage.key(0), 'a');
